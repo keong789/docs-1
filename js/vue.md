@@ -8,6 +8,8 @@ The ```aws-amplify-vue``` package is a set of Vue components which integrates yo
 
 {%include test.html %}
 
+{%if jekyll.environment == 'production'%}{{site.amplify.docs_baseurl}}{%endif%}
+
 ## Configuration 
 
 In your Vue app, install the following:
