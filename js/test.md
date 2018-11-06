@@ -1,2 +1,0 @@
-### I AM AN INCLUDED HEADER
-Hello there

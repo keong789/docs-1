@@ -15,9 +15,11 @@ AmplifyService
 AmplifyEventBus
 AmplifyPlugin
 Authenticator
+aws_bots_config.name
 aws-exports
 analytics
 backend
+botTitle
 cli
 callout
 callout--info
@@ -48,6 +50,7 @@ ios
 item.class.ts
 index.js
 lifecycle
+md
 Multifactor
 myPublicPrefix,
 myPrivatePrefix,
@@ -61,6 +64,7 @@ node.js
 onPick
 pre-signed
 pre-built
+programmatically
 repo
 src
 stylesheet
@@ -139,6 +143,7 @@ myprivateprefix
 # js/start.md
 codegen
 8.x
+8.11.x
 5.x
 webpack
 camelCase
@@ -304,6 +309,30 @@ S3Object
 s3
 versionInput
 versioning
+
+# js/vue.md
+confirmSignInConfig
+confirmSignUpConfig
+forgotPasswordConfig
+signInConfig
+signUpConfig
+signUpFields
+msg
+signOutButton
+mfaDescription
+mfaTypes
+tokenInstructions
+smsDescription
+totpDescription
+noMfaDescription
+cancelHandler
+defaultName
+amplify-vue
+
+# js/sign-up-fields.md
+displayOrder
+displayOrder
+signUpConfig.signUpFields
 
 # cli/plugins.md
 walk
@@ -517,6 +546,15 @@ xib
 Hoc
 Provisioining
 AppStore
+Ok
+CognitoIdentity
+CognitoUserPool
+PinpointAnalytics
+PinpointTargeting
+
+# ios/how-to-ios-setup-push-notifications
+Capitan
+Keychain
 
 #  ios/start.md
 xcworkspace
@@ -548,3 +586,8 @@ AWSS3TransferUtility
 
 # Readme.md
 CircleCI
+
+# android/analytics.md
+_userauth.sign_in
+_userauth.sign_up
+_userauth.auth_fail
