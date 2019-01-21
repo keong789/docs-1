@@ -3,7 +3,9 @@
 
 # Angular & Ionic
 
-AWS Amplify helps developers to create high-quality Ionic apps quickly by handling the heavy lifting of configuring and integrating cloud services behind the scenes. It also provides a powerful high-level API and ready-to-use security best practices.
+AWS Amplify helps developers to create high-quality Angular and Ionic apps quickly by handling the heavy lifting of configuring and integrating cloud services behind the scenes. It also provides a powerful high-level API and ready-to-use security best practices.
+
+The `aws-amplify-angular` package is compatible with Angular 5+ and Ionic 4.
 
 ## Installation
 
@@ -14,7 +16,6 @@ Install `aws-amplify` and `aws-amplify-angular` npm packages into your Angular a
 ```bash
 $ npm install --save aws-amplify
 $ npm install --save aws-amplify-angular
-$ npm install --save ionic-angular
 ```
 
 ## Setup the AWS Backend
