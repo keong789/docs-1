@@ -29,10 +29,12 @@ Ctrl-c
 cordova
 clearComplete
 Cognito
+classOverrides
 clearComplete
 chatbot
 ConfirmSignUp
 ConfirmSignIn
+css
 DynamoDB
 e.g.
 EventBus
@@ -220,6 +222,7 @@ amplify-s3-album
 styles.css
 6.x
 polyfills.ts
+requireNewPasswordConfig
 
 # js/interactions.md
 chatbots
@@ -227,6 +230,8 @@ Alexa
 chatbox
 onComplete
 theming
+voiceEnabled
+textEnabled
 
 js/i18n.md
 I18n
@@ -282,6 +287,7 @@ AmplifyTheme.js
 withFederated
 Auth.federatedSignIn
 aws.cognito.signin.user.admin
+ChallengeName
 
 #js/cognito-hosted-ui-federated-identity.md
 oauth2
@@ -405,6 +411,7 @@ amplify-provider-awscloudformation
 cloudformation
 awscloudformation
 awsconfiguration.json
+s3.amazonaws.com
 
 # cli/concept.md
 amplifyrc
@@ -746,6 +753,8 @@ uploadData
 # ios/interactions.md
 UIView
 xib
+react-native-fs
+Info.plist
 
 # ios/pubsub.md
 VeriSign
@@ -826,3 +835,6 @@ KMS-generated
 
 # android/auth-google-setup.md
 keystore
+
+# ios/pubsub.md
+authorizers
