@@ -300,7 +300,7 @@ The components in `aws-amplify-angular` use CSS modules from the `@amplify/ui` p
 
 You can append classes to the various elements of the `aws-amplify-angular` components by using the classOverrides feature.  This feature allows you to pass in an array of classes that pertain to a given CSS module from `@amplify/ui` package; these classes are then appended the class attribute in the markup.  Your custom classes should reside in your own stylesheet(s).  
 
-Be sure to remember that css classes derive precedence from the order in which they are encoutered in the stylesheet.
+Be sure to remember that css classes derive precedence from the order in which they are encountered in the stylesheet.
 
 For components which serve as parents for other components, such as `amplify-authenticator`, you can provide overrides for all of the children by passing the classOverrides prop to the parent component:
 
