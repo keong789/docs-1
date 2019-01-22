@@ -29,6 +29,7 @@ Ctrl-c
 cordova
 clearComplete
 Cognito
+classOverrides
 clearComplete
 chatbot
 ConfirmSignUp
@@ -220,6 +221,7 @@ amplify-s3-album
 styles.css
 6.x
 polyfills.ts
+requireNewPasswordConfig
 
 # js/interactions.md
 chatbots
