@@ -178,6 +178,23 @@ To use Authenticator, just add the `amplify-authenticator` directive in your .ht
   ...
 ```
 
+#### SignUp Configuration
+The SignUp component provides your users with the ability to sign up.  It is included as part of the ```authenticator``` component, but can also be used in isolation:
+
+Usage: 
+```<amplify-auth-sign-up [signUpConfig]="signUpConfig"></amplify-auth-sign-up>```
+or
+```<amplify-authenticator [signUpConfig]="signUpConfig"></amplify-authenticator>```
+
+The SignUp Component accepts a 'signUpConfig' object which allows you to customize it.
+
+{% include sign-up-attributes.html %}
+
+The signUpFields array in turn consist of an array of objects, each describing a field that will appear in sign up form that your users fill out:
+
+{% include sign-up-fields.html %}
+
+
 ### Photo Picker
 
 Photo Picker component will render a file upload control that will allow choosing a local image and uploading it to Amazon S3. Once an image is selected, a base64 encoded image preview will be displayed automatically.
@@ -273,8 +290,54 @@ To use the aws-amplify-angular components you will need to install '@aws-amplify
 Add the following to your styles.css file to use the default styles:
 ```@import '~aws-amplify-angular/theme.css';```
 
-You can use custom styling for AWS Amplify components. Just import your custom *styles.css* that overrides the default styles which can be found in `/node_modules/aws-amplify-angular/theme.css`.
+You can use custom themeing for AWS Amplify components. Just import your custom *styles.css* that overrides the default styles which can be found in `/node_modules/aws-amplify-angular/theme.css`.
 
+### Custom Styles
+
+*Note: This feature is currently in beta, and is available only for the authentication components.*
+
+The components in `aws-amplify-angular` use CSS modules from the `@amplify/ui` package.  This helps ensure consistency across components.
+
+You can append classes to the various elements of the `aws-amplify-angular` components by using the classOverrides feature.  This feature allows you to pass in an array of classes that pertain to a given CSS module from `@amplify/ui` package; these classes are then appended the class attribute in the markup.  Your custom classes should reside in your own stylesheet(s).  
+
+Be sure to remember that css classes derive precedence from the order in which they are encoutered in the stylesheet.
+
+For components which serve as parents for other components, such as `amplify-authenticator`, you can provide overrides for all of the children by passing the classOverrides prop to the parent component:
+
+<amplify-authenticator  
+  [classOverrides]="classOverrides"
+</amplify-authenticator>
+
+```js 
+  classOverrides = {
+    sectionHeader: ['class1', 'class2']
+  };
+```
+
+The same mechanism can be used for child components, but the classOverrides are properties if config objects for each child:
+
+<amplify-authenticator  
+  [classOverrides]="classOverrides"
+  [signUpConfig]="signUpConfig"
+  [signInConfig]="signInConfig"
+  [confirmSignUpConfig]="confirmSignUpConfig"
+  [confirmSignInConfig]="confirmSignInConfig"
+  [requireNewPasswordConfig]="requireNewPasswordConfig"
+  [forgotPasswordConfig]="forgotPasswordConfig"
+</amplify-authenticator>
+
+```js 
+  signUpConfig = {
+    classOverrides: {
+      sectionHeader: ['class2']
+    }
+  };
+  // other configs as necessary
+```
+
+The list of classes that are available include: 
+
+{% include ui-classes-angular.html %}
 
 ## Angular 6 Support
 
