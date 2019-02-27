@@ -3,23 +3,22 @@
 
 # Angular & Ionic
 
-AWS Amplify helps developers to create high-quality Ionic apps quickly by handling the heavy lifting of configuring and integrating cloud services behind the scenes. It also provides a powerful high-level API and ready-to-use security best practices.
+AWS Amplify helps developers to create high-quality Angular and Ionic apps quickly by handling the heavy lifting of configuring and integrating cloud services behind the scenes. It also provides a powerful high-level API and ready-to-use security best practices.
 
 ## Installation
 
-AWS Amplify provides Angular Components that you can use with Ionic in [aws-amplify-angular](https://www.npmjs.com/package/aws-amplify-angular) npm package.
+AWS Amplify provides Angular Components that you can use in [aws-amplify-angular](https://www.npmjs.com/package/aws-amplify-angular) npm package.
 
 Install `aws-amplify` and `aws-amplify-angular` npm packages into your Angular app.
 
 ```bash
 $ npm install --save aws-amplify
 $ npm install --save aws-amplify-angular
-$ npm install --save ionic-angular
 ```
 
 ## Setup the AWS Backend
 
-To configure your Ionic app for AWS Amplify, you need to create a backend configuration with Amplify CLI and import the auto-generated configuration file into your project. 
+To configure your Angular app for AWS Amplify, you need to create a backend configuration with Amplify CLI and import the auto-generated configuration file into your project. 
 
 Following commands will enable Auth category and will create `aws-exports.js` configuration file under your projects `/src` folder. 
 
@@ -35,14 +34,7 @@ Please visit [Authentication Guide]({%if jekyll.environment == 'production'%}{{s
 {: .callout .callout--info}
 
 
-A configuration file is placed inside your configured source directory. To import the configuration file to your Ionic app, you will need to rename `aws-exports.js` to `aws-exports.ts`. You can setup your `package.json` npm scripts to rename the file for you, so that any configuration changes which result in a new generated `aws-exports.js` file get changed over to the `.ts` extension.
-
-```javascript	
-"scripts": {	
-    "start": "[ -f src/aws-exports.js ] && mv src/aws-exports.js src/aws-exports.ts || ng serve; ng serve",	
-    "build": "[ -f src/aws-exports.js ] && mv src/aws-exports.js src/aws-exports.ts || ng build --prod; ng build --prod"	
-}	
-```
+A configuration file is placed inside your configured source directory. To import the configuration file to your Angular app, you may need to rename `aws-exports.js` to `aws-exports.ts`. You can setup your `package.json` npm scripts to rename the file for you, so that any configuration changes which result in a new generated `aws-exports.js` file get changed over to the `.ts` extension.
 
 ## Import and Configure Amplify
 
@@ -74,7 +66,49 @@ import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 });
 ```
 
-NOTE: the service provider is optional. You can import the core categories normally i.e. `import { Analytic } from 'aws-amplify'` or create your own provider. The service provider does some work for you and exposes the categories as methods. The provider also manages and dispatches authentication state changes using observables which you can subscribe to within your components (see below).
+### AmplifyService Angular Provider
+
+`AmplifyService` will pull the core services of the Amplify JS library and will make them available to your application as a provider.  This will cause dependencies of the various Amplify modules to be included in your app's bundle.  
+
+If you want to configure the `AmplifyService` using only a subset of Amplify modules - and thus limit included dependencies and bundle size impact - you can use the `AmplifyModules` helper within Angular's `useFactory` provider attribute.
+
+To do this, you must:
+
+a) Make sure that `main.ts` is import Amplify via `@aws-amplify/core` and not `aws-amplify`.  
+b) Import `AmplifyModules` from `aws-amplify-angular`;
+c) Import the Amplify modules that you want to include in the provider;
+d) Pass the modules to the AmplifyModules function in the useFactory attribute;
+
+For example, if you want to use only Auth and Storage you could do the following in `app.module.ts`:
+
+```javascript
+import { AmplifyAngularModule, AmplifyService, AmplifyModules } from 'aws-amplify-angular';
+import Auth from '@aws-amplify/auth';
+import Storage from '@aws-amplify/storage';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AmplifyAngularModule
+  ],
+  providers: [
+    {
+      provide: AmplifyService,
+      useFactory:  () => {
+        return AmplifyModules({
+          Auth,
+          Storage
+        });
+      }
+    }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
 ## Using the AWS Amplify API
 
@@ -173,7 +207,7 @@ $ amplify add auth
 To use Authenticator, just add the `amplify-authenticator` directive in your .html view:
 ```html
   ...
-  <amplify-authenticator framework="Ionic"></amplify-authenticator>
+  <amplify-authenticator></amplify-authenticator>
   ...
 ```
 
@@ -190,7 +224,7 @@ $ amplify add storage
 To render photo picker in an Angular view, use *amplify-photo-picker* component:
 
 ```html
-<amplify-photo-picker framework="Ionic"
+<amplify-photo-picker
     (picked)="onImagePicked($event)"
     (loaded)="onImageLoaded($event)">
 </amplify-photo-picker>
@@ -219,7 +253,7 @@ $ amplify add storage
 To render the album, use *amplify-s3-album* component in your Angular view:
 
 ```html
-<amplify-s3-album framework="Ionic" 
+<amplify-s3-album  
     path="pics" (selected)="onAlbumImageSelected($event)">
 </amplify-s3-album>
 ```
@@ -260,7 +294,7 @@ The `amplify-sumerian-scene` component provides you with a prebuilt UI for loadi
 
 ```javascript
 // sceneName: the configured friendly scene you would like to load
-<amplify-sumerian-scene sceneName="scene1" framework="Ionic"></amplify-sumerian-scene>
+<amplify-sumerian-scene sceneName="scene1" ></amplify-sumerian-scene>
 ```
 
 See the [XR documentation]({%if jekyll.environment == 'production'%}{{site.amplify.docs_baseurl}}{%endif%}/js/xr) for information on creating and publishing a Sumerian scene.
@@ -274,6 +308,16 @@ Add the following to your styles.css file to use the default styles:
 
 You can use custom styling for AWS Amplify components. Just import your custom *styles.css* that overrides the default styles which can be found in `/node_modules/aws-amplify-angular/theme.css`.
 
+## Ionic
+
+The Angular components described in this section each have corresponding
+Ionic components that can be used in an Ionic 4+ app.  The Ionic components combine the functionality and much of the styling of the Angular components with standard Ionic elements.
+
+The Ionic elements can be accessed in two ways:
+
+1) By passing `framework="ionic"` to the component markup.  For example, to use the Ionic version of the Authenticator component, you can use `<amplify-authenticator framework="ionic"></amplify-authenticator>`.
+
+2) By using the Ionic-specific tag.  For example: `<amplify-authenticator-ionic></amplify-authenticator-ionic>`. 
 
 ## Angular 6 Support
 
