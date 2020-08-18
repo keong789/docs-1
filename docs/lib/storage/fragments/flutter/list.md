@@ -18,7 +18,6 @@ try {
   );
           
   ListResult res = await Amplify.Storage.list(
-    path: "/", 
     options: options
   );
 } catch (e) {
