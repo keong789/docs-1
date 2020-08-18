@@ -3,7 +3,7 @@ To delete an object uploaded to S3, use `Amplify.Storage.remove` and specify the
 ```dart
 try {
   RemoveResult res = await Amplify.Storage.remove(
-    path: "myUploadedFileName.txt",
+    key: "myUploadedFileName.txt",
   );
 } catch (e) {
   print(e.toString());

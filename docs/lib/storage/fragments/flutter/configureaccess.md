@@ -1,6 +1,6 @@
- When adding the Storage category, you configure the level of access authenticated and guest users have to your S3 bucket. Additionally, when uploading files using the Storage category, you can specify the access level for that file to be either public, protected, or private.
+ When adding the Storage category, you configure the level of access authenticated and guest users have to your S3 bucket. Additionally, when uploading files using the Storage category, you can specify the access level for that file to be either guest(public), protected, or private.
 
-- **Public** Accessible by all users
+- **Guest** Accessible by all users
 - **Protected** Readable by all users, but only writable by the creating user
 - **Private** Readable and writable only by the creating user
 
@@ -8,7 +8,7 @@ For protected and private access, the `user_id` in the prefix corresponds to the
 
 <amplify-callout>
 
-The default access level for the Storage category is **public**. Unless you specify otherwise, all uploaded files will be publicly available for all users.
+The default access level for the Storage category is **guest**. Unless you specify otherwise, all uploaded files will be publicly available for all users.
 
 </amplify-callout>
 
@@ -19,15 +19,15 @@ Create an options object specifying the protected access level to allow other us
 ```dart
 try {
   // use a file selection mechanism of your choice
-  File local = await FilePicker.getFile(type: FileType.image);
+  File file = await FilePicker.getFile(type: FileType.image);
   final key = new DateTime.now().toString();
-  final path = local.absolute.path;
+  final local = file.absolute.path;
   S3UploadFileOptions options = S3UploadFileOptions(
     accessLevel: StorageAccessLevel.protected
   );
   UploadFileResult result = await Amplify.Storage.uploadFile(
     key: key,
-    path: path,
+    local: local,
     options: options
   );
 } catch (e) {
@@ -60,13 +60,13 @@ Create an options object specifying the private access level to only allow an ob
 ```dart
 try {
   // use a file selection mechanism of your choice
-  File local = await FilePicker.getFile(type: FileType.image);
+  File file = await FilePicker.getFile(type: FileType.image);
   final key = new DateTime.now().toString();
-  final path = local.absolute.path;
+  final local = file.absolute.path;
   S3UploadFileOptions options = S3UploadFileOptions(accessLevel: StorageAccessLevel.private);
   UploadFileResult result = await Amplify.Storage.uploadFile(
     key: key,
-    path: path,
+    local: local,
     options: options
   );
 } catch (e) {
@@ -77,6 +77,17 @@ try {
 For the user to read the file, you must specify the user ID of the creating user in the passed options:
 
 ```dart
+
+Future<String> get _localPath async {
+  final directory = await getApplicationDocumentsDirectory();
+  return directory.path;
+}
+
+Future<File> get _localFile async {
+  final path = await _localPath;
+  return File('$path/destinationpath.png');
+}
+
 try {
   S3DownloadFileOptions options = S3DownloadFileOptions(
   targetIdentityId: "userId",
