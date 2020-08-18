@@ -2,7 +2,7 @@ You can list all of the objects uploaded under a given prefix. This will list al
 
 ```dart
 try {
-  ListResult res = await Amplify.Storage.list(path: "");
+  ListResult res = await Amplify.Storage.list();
 } catch (e) {
   print(e.toString());
 }

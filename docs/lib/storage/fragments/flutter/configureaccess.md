@@ -45,7 +45,7 @@ try {
   );
   DownloadFileResult result = await Amplify.Storage.downloadFile(
     key: key,
-    local: new File('destinationpath.png'),
+    local: new File('$path/download.png')
     options: options
   );
 } catch (e) {
@@ -77,17 +77,6 @@ try {
 For the user to read the file, you must specify the user ID of the creating user in the passed options:
 
 ```dart
-
-Future<String> get _localPath async {
-  final directory = await getApplicationDocumentsDirectory();
-  return directory.path;
-}
-
-Future<File> get _localFile async {
-  final path = await _localPath;
-  return File('$path/destinationpath.png');
-}
-
 try {
   S3DownloadFileOptions options = S3DownloadFileOptions(
   targetIdentityId: "userId",
@@ -95,7 +84,7 @@ try {
   );
   DownloadFileResult result = await Amplify.Storage.downloadFile(
     key: key,
-    local: new File('destinationpath.png'),
+    local: new File('$path/download.png')
     options: options
   );
 } catch (e) {
