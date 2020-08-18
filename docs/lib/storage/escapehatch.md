@@ -5,4 +5,3 @@ description: For specialized use cases where Amplify does not provide the functi
 
 <inline-fragment platform="ios" src="~/lib/storage/fragments/ios/escapehatch.md"></inline-fragment>
 <inline-fragment platform="android" src="~/lib/storage/fragments/android/escapehatch.md"></inline-fragment>
-<inline-fragment platform="flutter" src="~/lib/storage/fragments/flutter/escapehatch.md"></inline-fragment>

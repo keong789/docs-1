@@ -2,7 +2,7 @@ To initialize the Amplify Auth and Storage categories you call `Amplify.addPlugi
 
 ```dart
 // Add this line, to include the Auth plugin.
-AmplifyAuthCognito auth = new AmplifyAuthCognito();
-AmplifyStorageS3 storage = new AmplifyStorageS3();
+AmplifyAuthCognito auth = AmplifyAuthCognito();
+AmplifyStorageS3 storage = AmplifyStorageS3();
 amplify.addPlugin(authPlugins: [auth], storagePlugins: [storage]);
 ```
