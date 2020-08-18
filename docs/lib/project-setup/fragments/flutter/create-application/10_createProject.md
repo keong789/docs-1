@@ -8,7 +8,7 @@ Next, configure your project:
 
 1. Enter *MyAmplifyApp* in the **Name** field
 2. Make sure your Flutter SDK path is set correctly to where it is installed on your machine 
-3. Press **Next**.  On the next screen, press **Finish**. 
+3. Press **Next**. On the next screen, press **Finish**. 
 
   ![](~/images/lib/getting-started/flutter/set-up-android-studio-configure-your-project.png)
 
